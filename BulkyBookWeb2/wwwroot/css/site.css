@@ -1,0 +1,31 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/*.review-icon {*/
+th, td {
+    text-align: center
+}
+
+.form-group{
+    margin-top: 10px;
+}
+
+.control-label {
+    margin-bottom: 5px;
+}

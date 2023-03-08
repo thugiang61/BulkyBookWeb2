@@ -1,0 +1,140 @@
+﻿@using BulkyBookWeb2.Models.Enums
+@model IEnumerable<BulkyBookWeb2.Models.Book>
+
+@{
+    ViewData["Title"] = "Books List";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p><small><i>Hiểu, nhớ, đoán, cảm, giọng văn</i></small></p>
+<p><small><i>Tập trung, chi tiết, suy nghĩ</i></small></p>
+<p><small><i>Thực tế, logic, cảm nhận</i></small></p>
+<p><small><i>Suy luận, nghi ngờ, đoán</i></small></p>
+
+@*<div class="d-flex justify-content-between m-3">
+    <form asp-action="Index" method="get" class="w-75">
+    <input class="w-50 m-2" name="searchString" placeholder="Search by book name or author"/>
+    <input class="btn-primary rounded-1" type="submit" value="Search"/>
+    <input class="btn-primary rounded-1" type="button" value="Back to List" onclick="history.go(-1); return false;"/>
+    </form>*@
+@*<p style="margin-right: 4%" class="float-end">
+    <a asp-action="Create" class="text-right"><i class="fa-solid fa-plus"></i> Create New</a>
+    </p>*@
+@*</div>*@
+
+<table class="table">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            @*<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>*@
+                  <a asp-action="Index" role="tab" data-toggle="tab">Submission</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+        </li>
+    </ul>
+    @*<div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+    </div>*@
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                Reviewed
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>No records</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        else
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>@{++i;}</td>*@
+                    <td>@i</td>
+                    <td>
+                        <b>@item.Name</b>
+                    </td>
+                    <td>
+                        @item.Author
+                    </td>
+                    <td>
+                        @if (!@item.StartDate.HasValue)
+                        {
+                            <span>&lt;Not started&gt;</span>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        }
+                        @*@item.StartDate*@
+                        @*neu xai dong duoi thi se ko hien thi chi moi ngay ko dc*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @if (@item.Review == null)
+                        {
+                            <i class="fa-solid fa-xmark"></i>
+                        }
+                        else
+                        {
+                            <i class="fa-solid fa-check"></i>
+                        }
+                    </td>
+                    <td>
+                        @if (@item.Price == null)
+                        {
+                            <span>&lt;Not entered&gt;</span>
+                        }
+                        else
+                        {
+                            @string.Format("{0:N0}", @item.Price) <span>VND</span>
+
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+                i++;
+            }
+    </tbody>
+</table>
+
+<p><small><i>Sách ngoại văn: Từ vựng Nphap Ndung viết Cách viết Hỉu Nhớ Đoán Cảm Giọg văn</i></small></p>
+<p><small><i>Sách săn sale: Chưa có ebook Ndung Giảm giá Bìa Review</i></small></p>

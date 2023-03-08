@@ -1,0 +1,9 @@
+﻿@*@section Scripts{*@
+    @if(TempData["success"]!= null){
+        // dung 2 dong ke tiep o day thay vi o _layout vi dung o day ms goi cai toastr ra dc
+        // con co jquery vi cai toastr.js vs cai object toastr nay can dung ttiep ?
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="text/javascript">toastr.success('@TempData["success"]')</script>
+    }
+@*}*@
