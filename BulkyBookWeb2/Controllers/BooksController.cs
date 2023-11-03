@@ -27,7 +27,14 @@ namespace BulkyBookWeb2.Controllers
 
             if (selectedYear != (int)FilteredByYearCriteria.ShowAll)
             {
-                books = books.Where(b => b.FinishDate.HasValue && b.FinishDate.Value.Year == selectedYear);
+                if (selectedYear == (int)FilteredByYearCriteria.NotFinishedYet)
+                {
+                    books = books.Where(b => !b.FinishDate.HasValue);
+                }
+                else
+                {
+                    books = books.Where(b => b.FinishDate.HasValue && b.FinishDate.Value.Year == selectedYear);
+                }
             }
 
             if (!string.IsNullOrEmpty(searchString))
@@ -38,7 +45,8 @@ namespace BulkyBookWeb2.Controllers
             var booksFilteredByYear = new BooksFilteredByYearViewModel
             {
                 Books = await books.ToListAsync(),// List la con cua IEnum nen ko can cast tu tk con cu the len tk cha tong quat
-                Years = await years.ToListAsync()
+                Years = await years.ToListAsync(),
+                SelectedYear = selectedYear,
             };
 
             return View(booksFilteredByYear);
@@ -84,11 +92,24 @@ namespace BulkyBookWeb2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Author,Genre,StartDate,FinishDate,Status,Review,OtherNote,Price")] Book book)
         {
+            // custom loi modelstate neu co, trc khi xet modelstate.isvalid?
+            //if (book.StartDate.HasValue &&
+            //    book.FinishDate.HasValue &&
+            //    book.StartDate.Value.Date == book.FinishDate.Value.Date
+            //   )
+            //{
+            //    ModelState.AddModelError("finishDate", "The start date and finish date should not be the same");
+            //}
+            // thuc te thi van co the co quyen sach dc hthanh trg 1 ng ma 
+
+
             if (ModelState.IsValid)
-            {
+            { 
                 _context.Add(book);
                 await _context.SaveChangesAsync();
+
                 TempData["success"] = "The book is created successfully!";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(book);

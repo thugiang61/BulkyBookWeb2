@@ -5,134 +5,138 @@
     ViewData["Title"] = "Book Details";
 }
 
+
 <h1>Details</h1>
 
-<div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            <b>@Html.DisplayFor(model => model.Name)</b>
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @*@{
-                switch (@Model.Status)
+<div class="book-detail">
+    <div>
+        <h4>Book</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                <b>@Html.DisplayFor(model => model.Name)</b>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Author)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Author)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @*@{
+                    switch (@Model.Status)
+                    {
+                    case BookStatus.IsReading:
+                    <span>Is Reading</span>
+                    break;
+                    case BookStatus.IsHaving:
+                    <span>Is Having</span>
+                    break;
+                    case BookStatus.IntendToBuy:
+                    <span>Intend to Buy</span>
+                    break;
+                    case BookStatus.IntendToRead:
+                    <span>Intend to Read</span>
+                    break;
+                    case BookStatus.Finished:
+                    <span>Finished</span>
+                    break;
+                    //default:
+                    //    <span>Finished</span>
+                    }
+                    }*@
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Genre)
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.Genre == null)
                 {
-                case BookStatus.IsReading:
-                <span>Is Reading</span>
-                break;
-                case BookStatus.IsHaving:
-                <span>Is Having</span>
-                break;
-                case BookStatus.IntendToBuy:
-                <span>Intend to Buy</span>
-                break;
-                case BookStatus.IntendToRead:
-                <span>Intend to Read</span>
-                break;
-                case BookStatus.Finished:
-                <span>Finished</span>
-                break;
-                //default:
-                //    <span>Finished</span>
+                    <span>&lt;Not entered genre&gt;</span>
                 }
-                }*@
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
-        <dd class="col-sm-10">
-            @if (@Model.Genre == null)
-            {
-                <span>&lt;Not entered genre&gt;</span>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.Genre)
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class="col-sm-10">
-            @if (!@Model.StartDate.HasValue)
-            {
-                <span>&lt;Not started&gt;</span>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.StartDate)
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FinishDate)
-        </dt>
-        <dd class="col-sm-10">
-            @if (!@Model.FinishDate.HasValue)
-            {
-                <span>&lt;Not finished&gt;</span>
-            }
-            else
-            {
-                @*<span>hello1</span>*@
-                @Html.DisplayFor(model => model.FinishDate)
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Review)
-        </dt>
-        <dd class="col-sm-10 w-75">
-            @if (@Model.Review == null)
-            {
-                <span>&lt;Not reviewed&gt;</span>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.Review)
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OtherNote)
-        </dt>
-        <dd class="col-sm-10 w-75">
-            @if (@Model.OtherNote == null)
-            {
-                <span>&lt;Not entered note&gt;</span>
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.OtherNote)
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @if (@Model.Price == null)
-            {
-                <span>&lt;Not entered price&gt;</span>
-            }
-            else
-            {
-                @string.Format("{0:N0}", @Model.Price) <span>VND</span>
-            }
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary m-2">Edit</a>
-    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                else
+                {
+                    @Html.DisplayFor(model => model.Genre)
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-10">
+                @if (!Model.StartDate.HasValue)
+                {
+                    <span>&lt;Not started&gt;</span>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.StartDate)
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FinishDate)
+            </dt>
+            <dd class="col-sm-10">
+                @if (!Model.FinishDate.HasValue)
+                {
+                    <span>&lt;Not finished&gt;</span>
+                }
+                else
+                {
+                    @*<span>hello1</span>*@
+                    @Html.DisplayFor(model => model.FinishDate)
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Review)
+            </dt>
+            <dd class="col-sm-10 w-75">
+                @if (Model.Review == null)
+                {
+                    <span>&lt;Not reviewed&gt;</span>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.Review)
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.OtherNote)
+            </dt>
+            <dd class="col-sm-10 w-75">
+                @if (Model.OtherNote == null)
+                {
+                    <span>&lt;Not entered note&gt;</span>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => model.OtherNote)
+                }
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.Price == null)
+                {
+                    <span>&lt;Not entered price&gt;</span>
+                }
+                else
+                {
+                    @string.Format("{0:N0}", Model.Price) <span>VND</span>
+                }
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary m-2">Edit</a>
+        <a onclick="history.go(-1)" class="btn btn-primary">Back to List</a>
+        @*<a asp-action="Index" class="btn btn-primary">Back to List</a>*@
+    </div>    
 </div>
