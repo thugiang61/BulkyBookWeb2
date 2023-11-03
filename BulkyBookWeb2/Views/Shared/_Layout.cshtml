@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BulkyBookWeb2.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -24,17 +25,14 @@
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Books" asp-action="Index">Books</a>
+                            <a class="nav-link text-dark" asp-controller="Books" asp-action="Index">My books</a>
                         </li>
                     </ul>
                 </div>
-                <form asp-controller="Books" asp-action="Index" method="get" class="w-75 text-end" >
-                    <input class="w-50 m-2" name="searchString" placeholder="Search all books by name or author"/>
-                    <input class="btn btn-primary" type="submit" value="Search"/>
-                    <a asp-controller="Books" asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <form asp-controller="Books" asp-action="Index" method="get" class="w-75 text-end">
+                    <input class="w-50 m-2 search-input" name="searchString" placeholder="Search all books by name or author" />
+                    <input class="btn btn-primary mb-1" style="background-color:#0d6efd" type="submit" value="Search" />
+                    @*<a asp-controller="Books" asp-action="Index" class="btn btn-secondary mb-1">Back to List</a>*@
                     @*<input class="btn-primary rounded-1" type="button" value="Back to List" onclick="history.go(-1); return false;"/>*@
                     @*cai nay ma lo tu 1 trang mo do nhu la medium.com cha han chuyen qua link index co search string thi luc ma click Back to list thi no se tro ve trag medium.com mat*@
                 </form>
@@ -44,13 +42,13 @@
     <div class="container">
         <main role="main" class="pb-3">
             <partial name="_Notification">
-            @RenderBody()
+                @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - BulkyBookWeb2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - <a asp-area="" asp-controller="Home" asp-action="Index">BulkyBookWeb2</a> - by Thu Giang
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

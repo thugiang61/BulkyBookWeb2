@@ -4,8 +4,8 @@ namespace BulkyBookWeb2.Models.Enums
 {
     public enum FilteredByYearCriteria
     {
-        ShowAll,
-        [Display(Name = "Not finisished yet")]
-        NotFinishedYet
+        ShowAll, // 0
+        //[Display(Name = "Not finisished yet")]
+        NotFinishedYet // 1
     }
 }
