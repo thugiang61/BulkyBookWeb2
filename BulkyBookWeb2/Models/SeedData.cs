@@ -14,13 +14,6 @@ namespace BulkyBookWeb2.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<BulkyBookWeb2Context>>()))
             {
-                //// Delete all data first
-                //while (context.Book.Any())
-                //{
-                //    context.Remove(context.Book.First());
-                //    context.SaveChanges();// neu thieu dong ni thi ko dc
-                //}
-
                 // Look for any Books.
                 if (context.Book.Any())
                 {

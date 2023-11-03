@@ -8,21 +8,23 @@ namespace BulkyBookWeb2.Models
     public class Book
     {
         public int Id { get; set; }
+        
         public string Name { get; set; } = string.Empty;
+        
         public string Author { get; set; } = string.Empty;
+        
         public string? Genre { get; set; }
 
         [DisplayName("Start Reading")]
         [DataType(DataType.Date)]
-        //s ma mac dinh thay han hien dung format len gdien r nhi
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
         public DateTime? StartDate { get; set; } = default(DateTime?);
 
         [DisplayName("Finish Reading")]
         [DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/MM/yyyy}")]
         public DateTime? FinishDate { get; set; } = default(DateTime?);
+        
         public BookStatus Status { get; set; }
+        
         public string? Review { get; set; }
 
         [DisplayName("Other Note")]

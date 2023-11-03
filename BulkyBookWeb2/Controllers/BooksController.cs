@@ -23,8 +23,6 @@ namespace BulkyBookWeb2.Controllers
             IQueryable<Book> books = from b in _context.Book select b;
             IQueryable<int> years = books.Select(b => b.FinishDate.HasValue ? b.FinishDate.Value.Year : (int)FilteredByYearCriteria.NotFinishedYet).Distinct();
 
-            //selectedYear = selectedYear != (int)FilteredByYearCriteria.ShowAll ? selectedYear : (int)FilteredByYearCriteria.ShowAll;
-
             if (selectedYear != (int)FilteredByYearCriteria.ShowAll)
             {
                 if (selectedYear == (int)FilteredByYearCriteria.NotFinishedYet)
@@ -52,21 +50,6 @@ namespace BulkyBookWeb2.Controllers
             return View(booksFilteredByYear);
         }
 
-
-        ////index, details, create, update, delete
-        //[HttpGet]
-        //public async Task<IActionResult> Index(int searchString)
-        //{
-        //    var books = from b in _context.Book select b;
-
-        //    if (!string.IsNullOrEmpty(searchString))
-        //    {
-        //        books = books.Where(b => b.Name.Contains(searchString) || b.Author.Contains(searchString));
-        //    }
-
-        //    return View(await books.ToListAsync());
-        //}
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Book == null)
@@ -75,7 +58,7 @@ namespace BulkyBookWeb2.Controllers
             }
 
             var book = await _context.Book.FindAsync(id);
-            //var book = await _context.Book.FirstOrDefaultAsync(m => m.Id == id);   
+
             if (book == null)
             {
                 return NotFound();
@@ -92,17 +75,6 @@ namespace BulkyBookWeb2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Author,Genre,StartDate,FinishDate,Status,Review,OtherNote,Price")] Book book)
         {
-            // custom loi modelstate neu co, trc khi xet modelstate.isvalid?
-            //if (book.StartDate.HasValue &&
-            //    book.FinishDate.HasValue &&
-            //    book.StartDate.Value.Date == book.FinishDate.Value.Date
-            //   )
-            //{
-            //    ModelState.AddModelError("finishDate", "The start date and finish date should not be the same");
-            //}
-            // thuc te thi van co the co quyen sach dc hthanh trg 1 ng ma 
-
-
             if (ModelState.IsValid)
             { 
                 _context.Add(book);
@@ -139,12 +111,6 @@ namespace BulkyBookWeb2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Author,Genre,StartDate,FinishDate,Status,Review,OtherNote,Price")] Book book)
         {
-            // ko bik doan nay de lam j nx 
-            //if (id != book.Id)
-            //{
-            //    return NotFound();
-            //}
-
             if (ModelState.IsValid)
             {
                 try
