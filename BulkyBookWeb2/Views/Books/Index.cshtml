@@ -1,8 +1,10 @@
 ﻿@using BulkyBookWeb2.Models.Enums
+@using System.Security.Claims
 @model BulkyBookWeb2.Models.BooksFilteredByYearViewModel
 
 @{
-    ViewData["Title"] = "Books List";
+    ViewData["Title"] = "Books List of " + User.FindFirstValue(ClaimTypes.Name); // du s trang index cx chi dc hien khi va chi khi user da log in r nen la hien "book list of" cx ko so du chu "of"
+    //ViewData["Title"] = "Books List of " + ViewData["UserName"];
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -12,6 +14,7 @@
 <p><small><i>Suy luận, nghi ngờ, đoán</i></small></p>
 
 <ul class="nav nav-tabs justify-content-end mb-2">
+    @*dropdown list to filter book by: finished year/ not finished yet/ selected year*@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle @(Model.SelectedYear != (int)FilteredByYearCriteria.ShowAll ? "active":"")" data-bs-toggle="dropdown" role="button" aria-expanded="false">
             @if (Model.SelectedYear == (int)FilteredByYearCriteria.ShowAll)

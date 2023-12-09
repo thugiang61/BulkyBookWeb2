@@ -11,8 +11,8 @@ namespace BulkyBookWeb2.Models
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var context = new BulkyBookWeb2Context(
-                serviceProvider.GetRequiredService<
-                    DbContextOptions<BulkyBookWeb2Context>>()))
+                    serviceProvider.GetRequiredService<DbContextOptions<BulkyBookWeb2Context>>())
+                  )
             {
                 //// Delete all data first
                 //while (context.Book.Any())
@@ -35,7 +35,7 @@ namespace BulkyBookWeb2.Models
                         Genre = "Black people, Novel, Historical fiction",
                         StartDate = DateTime.Parse("2022-6-12"),
                         Status = Enums.BookStatus.IsReading,
-                        OtherNote = "Quyen nay la minh muon no th nha",
+                        OtherNote = "This book was borrowed from a friend",
                         Price = 130000M
                     },
                     new Book
@@ -48,13 +48,13 @@ namespace BulkyBookWeb2.Models
                         Status = Enums.BookStatus.Finished,
                         Review = "What an exciting book, each Holmes' adventure is an mysterious case",
                         Price = 150000M
-                    },
-                    new Book
-                    {
-                        Name = "Người trong lưới",
-                        Author = "Chan Ho Kei",
-                        Status = Enums.BookStatus.IntendToBuy,
                     }
+                    //new Book
+                    //{
+                    //    Name = "Người trong lưới",
+                    //    Author = "Chan Ho Kei",
+                    //    Status = Enums.BookStatus.IntendToBuy,
+                    //}
                 );
                 context.SaveChanges();
             }

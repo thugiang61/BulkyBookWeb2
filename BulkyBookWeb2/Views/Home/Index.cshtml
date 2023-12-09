@@ -1,9 +1,11 @@
-﻿@{
+﻿@using System.Security.Claims
+@{
     ViewData["Title"] = "Home Page";
+    //var userName = User.FindFirstValue(ClaimTypes.Name);
 }
 
 <div class="text-center home-message">
-    <h1 class="display-2">Welcome</h1>
+    <h1 class="display-2">Welcome @User.FindFirstValue(ClaimTypes.Name)</h1>
     <h1 class="display-4">
         <span>This is where YOU can store your own favorite books,</span>
         <br />
