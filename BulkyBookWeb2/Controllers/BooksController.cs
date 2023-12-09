@@ -61,21 +61,6 @@ namespace BulkyBookWeb2.Controllers
             return View(booksFilteredByYear);
         }
 
-
-        ////index, details, create, update, delete
-        //[HttpGet]
-        //public async Task<IActionResult> Index(int searchString)
-        //{
-        //    var books = from b in _context.Book select b;
-
-        //    if (!string.IsNullOrEmpty(searchString))
-        //    {
-        //        books = books.Where(b => b.Name.Contains(searchString) || b.Author.Contains(searchString));
-        //    }
-
-        //    return View(await books.ToListAsync());
-        //}
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Book == null)

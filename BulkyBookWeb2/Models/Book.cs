@@ -10,7 +10,9 @@ namespace BulkyBookWeb2.Models
         public int Id { get; set; }
         public string UserId { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
+        
         public string Author { get; set; } = string.Empty;
+        
         public string? Genre { get; set; }
 
         [DisplayName("Start Reading")]
@@ -20,7 +22,9 @@ namespace BulkyBookWeb2.Models
         [DisplayName("Finish Reading")]
         [DataType(DataType.Date)]
         public DateTime? FinishDate { get; set; } = default(DateTime?);
+        
         public BookStatus Status { get; set; }
+        
         public string? Review { get; set; }
 
         [DisplayName("Other Note")]

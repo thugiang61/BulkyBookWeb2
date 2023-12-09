@@ -14,6 +14,4 @@ namespace BulkyBookWeb2.Models.Enums
         IsHaving,
         Finished
     }
-
-    //public string toString()
 }
