@@ -14,14 +14,6 @@ namespace BulkyBookWeb2.Models
                     serviceProvider.GetRequiredService<DbContextOptions<BulkyBookWeb2Context>>())
                   )
             {
-                //// Delete all data first
-                //while (context.Book.Any())
-                //{
-                //    context.Remove(context.Book.First());
-                //    context.SaveChanges();// neu thieu dong ni thi ko dc
-                //}
-
-                // Look for any Books.
                 if (context.Book.Any())
                 {
                     return;   // DB has been seeded
@@ -49,12 +41,6 @@ namespace BulkyBookWeb2.Models
                         Review = "What an exciting book, each Holmes' adventure is an mysterious case",
                         Price = 150000M
                     }
-                    //new Book
-                    //{
-                    //    Name = "Người trong lưới",
-                    //    Author = "Chan Ho Kei",
-                    //    Status = Enums.BookStatus.IntendToBuy,
-                    //}
                 );
                 context.SaveChanges();
             }

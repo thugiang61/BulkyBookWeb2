@@ -16,18 +16,16 @@ builder.Services
     })
     .AddCookie(options =>
     {
-        //options.LoginPath = "/accounts/google-login";
         options.LoginPath = "/Accounts/GoogleLogin";
     })
     .AddGoogle(options =>
     {
         if (builder.Environment.IsDevelopment())
         {
-            //options.ClientId = builder.Configuration["ClientId"]; // this is from appsettings.json
             options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
             options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
         }
-        else if (builder.Environment.IsProduction())////////////////////////////
+        else if (builder.Environment.IsProduction())
         {
            #pragma warning disable CS8601 // Possible null reference assignment.
             options.ClientId = Environment.GetEnvironmentVariable("ClientId");
@@ -73,6 +71,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-//pattern: "{controller=Books}/{action=Index}/{id?}");
 
 app.Run();

@@ -20,7 +20,6 @@ namespace BulkyBookWeb2.Controllers
             _context = context;
         }
 
-        //index, details, create, update, delete
         [HttpGet]
         public async Task<IActionResult> Index(string searchString, int selectedYear = (int)FilteredByYearCriteria.ShowAll)// 2 tham so nay o 2 view khac nhau nen luc goi thi cx chi goi dc theo 1 trg 2 tiu chi th
         {
@@ -34,8 +33,6 @@ namespace BulkyBookWeb2.Controllers
             }
 
             IQueryable<int> years = books.Select(b => b.FinishDate.HasValue ? b.FinishDate.Value.Year : (int)FilteredByYearCriteria.NotFinishedYet).Distinct();
-
-            //selectedYear = selectedYear != (int)FilteredByYearCriteria.ShowAll ? selectedYear : (int)FilteredByYearCriteria.ShowAll;
 
             if (selectedYear != (int)FilteredByYearCriteria.ShowAll)
             {
@@ -56,16 +53,10 @@ namespace BulkyBookWeb2.Controllers
 
             var booksFilteredByYear = new BooksFilteredByYearViewModel
             {
-                Books = await books.ToListAsync(),// List la con cua IEnum nen ko can cast tu tk con cu the len tk cha tong quat
+                Books = await books.ToListAsync(),
                 Years = await years.ToListAsync(),
                 SelectedYear = selectedYear,
             };
-
-            //var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            //TempData["UserName"] = result.Principal?.Claims.ElementAt(1).Value; // second claim has user name value
-            //TempData["UserName"] = User.Claims.Count() > 0 ? User.Claims.First(c => c.Type == ClaimTypes.Name).Value : null;
-            
-            //ViewData["UserName"] = User.FindFirstValue(ClaimTypes.Name); // in GoogleLogin() action, it will always redirect to Books\Index, therefore we assign a global ViewData here to populate to other places needing it
 
             return View(booksFilteredByYear);
         }
@@ -91,9 +82,7 @@ namespace BulkyBookWeb2.Controllers
             {
                 return NotFound();
             }
-
-            //var book = await _context.Book.FindAsync(id);
-            //var book = await _context.Book.FirstOrDefaultAsync(m => m.Id == id);   
+ 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var book = await _context.Book.FirstAsync(b => b.Id == id && b.UserId == currentUserId);
             if (book == null)
@@ -112,17 +101,6 @@ namespace BulkyBookWeb2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Author,Genre,StartDate,FinishDate,Status,Review,OtherNote,Price")] Book book)
         {
-            // custom loi modelstate neu co, trc khi xet modelstate.isvalid?
-            //if (book.StartDate.HasValue &&
-            //    book.FinishDate.HasValue &&
-            //    book.StartDate.Value.Date == book.FinishDate.Value.Date
-            //   )
-            //{
-            //    ModelState.AddModelError("finishDate", "The start date and finish date should not be the same");
-            //}
-            // thuc te thi van co the co quyen sach dc hthanh trg 1 ng ma 
-
-
             if (ModelState.IsValid)
             {
                 book.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -144,8 +122,6 @@ namespace BulkyBookWeb2.Controllers
                 return NotFound();
             }
 
-            // vì sao theo scraffolding code thì chỉ mình chỗ này vs chỗ deleteconfirmed ms xài find th chư còn lại đều xài firstordefault hết nhỉ 
-            //var book = await _context.Book.FindAsync(id);
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var book = await _context.Book.FirstAsync(b => b.Id == id && b.UserId == currentUserId);
             if (book == null || book.UserId != currentUserId)
@@ -162,7 +138,6 @@ namespace BulkyBookWeb2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,Author,Genre,StartDate,FinishDate,Status,Review,OtherNote,Price")] Book book)
         {
-            // ko bik doan nay de lam j nx, chac la so id bi tdoi bang tay lam cho khac vs Book.Id 
             if (id != book.Id)
             {
                 return NotFound();
@@ -208,9 +183,7 @@ namespace BulkyBookWeb2.Controllers
             {
                 return NotFound();
             }
-
-            // mình nghĩ là nếu chỉ cần dữ liệu để hiện thị lên view th thì xài find để tìm trog dbcontext trc (r nếu ko có thì sẽ vô db) ổn hơn là xài firstordefault để mà vô db tìm lun 
-            //var book = await _context.Book.FindAsync(id);
+                  
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var book = await _context.Book.FirstAsync(b => b.Id == id && b.UserId == currentUserId);
             if (book == null)
@@ -227,8 +200,6 @@ namespace BulkyBookWeb2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)
         {
-            // vì sao theo scraffolding code thì chỉ mình chỗ này vs chỗ view edit ms xài find th chư còn lại đều xài firstordefault hết nhỉ 
-            //var book = await _context.Book.FindAsync(id);
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var book = await _context.Book.FirstAsync(b => b.Id == id && b.UserId == currentUserId);
             if (book == null)
@@ -242,9 +213,6 @@ namespace BulkyBookWeb2.Controllers
                 TempData["success"] = "The book is deleted successfully!";
                 return RedirectToAction(nameof(Index));
             }
-
-            //vi ko co check model isValid hay ko nhu khi edit hay create nen la ko can co dong nay de load lai trang edit hay create nx
-            //return View(book);
         }
 
         public bool BookExists(int id)

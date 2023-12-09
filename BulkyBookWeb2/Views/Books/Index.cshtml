@@ -3,8 +3,7 @@
 @model BulkyBookWeb2.Models.BooksFilteredByYearViewModel
 
 @{
-    ViewData["Title"] = "Books List of " + User.FindFirstValue(ClaimTypes.Name); // du s trang index cx chi dc hien khi va chi khi user da log in r nen la hien "book list of" cx ko so du chu "of"
-    //ViewData["Title"] = "Books List of " + ViewData["UserName"];
+    ViewData["Title"] = "Books List of " + User.FindFirstValue(ClaimTypes.Name);
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -37,16 +36,6 @@
                     if (year == (int)FilteredByYearCriteria.NotFinishedYet)
                     {
                     <li>
-                            @*<input type="hidden" value="@((int)FilteredByYearCriteria.NotFinishedYet)" name="selectedYear" />*@
-                            @*<input class="w-100 dropdown-item text-center not-finished-yet-selection" type="submit" value="@((int)FilteredByYearCriteria.NotFinishedYet)" name="selectedYear" />*@
-                            @*<span>Not finished yet</span>*@
-
-                            @*  <input
-                                class="w-100 dropdown-item text-center not-finished-yet-selection"
-                                type="submit"
-                                value="Not finished yet"
-                                name="selectedYear"
-                                onclick="@Url.Action("Index","Books", new { selectedYear = (int)FilteredByYearCriteria.NotFinishedYet })" />*@
                         <a class="w-100 dropdown-item text-center"
                    href="@Url.Action("Index","Books", new { selectedYear = (int)FilteredByYearCriteria.NotFinishedYet })">
                             Not finished yet
@@ -59,13 +48,9 @@
                     <li><input class="w-100 dropdown-item text-center" type="submit" value="@year" name="selectedYear" /></li>
                     }
                 }
-                @*<li><a class="dropdown-item" asp-action="Index" asp-for="selectedYear">2022</a></li>*@
             </form>
         </ul>
     </li>
-    @*  <select asp-for="selectedYear" asp-items="Model.Years">
-        <option value="">Select finished year</option>
-        </select>*@
     <li class="nav-item">
         <a asp-action="Index" class="text-right nav-link @(Model.SelectedYear == (int)FilteredByYearCriteria.ShowAll ? "active":"")">Show all</a>
     </li>
@@ -79,8 +64,6 @@
         <tr>
             <th>#</th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Name)*@
-                @*neu ma xai @Html.DisplayNameFor(model => model.Books[0].Name) thi bi warning nen m de co dinh la Name lun*@
                 Name
             </th>
             <th>
@@ -123,7 +106,6 @@
             @foreach (var item in Model.Books)
             {
                 <tr>
-                    @*<td>@{++i;}</td>*@
                     <td>@i</td>
                     <td>
                         <b>@item.Name</b>
@@ -140,8 +122,6 @@
                         {
                             @Html.DisplayFor(modelItem => item.StartDate)
                         }
-                        @*@item.StartDate*@
-                        @*neu xai dong duoi thi se ko hien thi chi moi ngay ko dc*@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Status)
@@ -185,11 +165,7 @@
 </div>
 
 <style>
-    /*.not-finished-yet-selection::before {
-            content: "Not finished yet"
-            }*/
     .dropdown-menu {
-        /*transform: translate(0px, 40px) !important*/
         top: -5% !important
     }
 </style>

@@ -29,28 +29,6 @@
                 @Html.DisplayNameFor(model => model.Status)
             </dt>
             <dd class="col-sm-10">
-                @*@{
-                    switch (@Model.Status)
-                    {
-                    case BookStatus.IsReading:
-                    <span>Is Reading</span>
-                    break;
-                    case BookStatus.IsHaving:
-                    <span>Is Having</span>
-                    break;
-                    case BookStatus.IntendToBuy:
-                    <span>Intend to Buy</span>
-                    break;
-                    case BookStatus.IntendToRead:
-                    <span>Intend to Read</span>
-                    break;
-                    case BookStatus.Finished:
-                    <span>Finished</span>
-                    break;
-                    //default:
-                    //    <span>Finished</span>
-                    }
-                    }*@
                 @Html.DisplayFor(model => model.Status)
             </dd>
             <dt class="col-sm-2">
@@ -89,7 +67,6 @@
                 }
                 else
                 {
-                    @*<span>hello1</span>*@
                     @Html.DisplayFor(model => model.FinishDate)
                 }
             </dd>
@@ -137,6 +114,5 @@
     <div>
         <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary m-2">Edit</a>
         <a onclick="history.go(-1)" class="btn btn-primary">Back to List</a>
-        @*<a asp-action="Index" class="btn btn-primary">Back to List</a>*@
     </div>    
 </div>

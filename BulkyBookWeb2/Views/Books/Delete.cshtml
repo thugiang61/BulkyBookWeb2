@@ -114,13 +114,5 @@
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger m-2" />
         <a onclick="history.go(-1)" class="btn btn-primary">Back to List</a>
-        @*<a asp-action="Index" class="btn btn-primary">Back to List</a>*@
     </form>
-
-    @*ko hieu s doan duoi nay lai ko dc tuong tu nhu trang Details vs Index nhi,
-        chac la do 2 the a o duoi la goi den view dc th, chu con goi den action ma 
-        lam tdoi dlieu thi pjai thong qua the form?!?
-    *@
-    @*<a asp-action="DeleteConfirmed" asp-route-id="@Model.Id" class="btn btn-danger m-2">Delete</a>
-    <a asp-action="Index" class="btn btn-primary">Back to List</a>*@
 </div>
