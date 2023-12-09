@@ -8,7 +8,7 @@ Main features:
 - Add your favorite books and theirs information (author, type, status,...).
 - You can update these information later on.
 - Filter your books by year.
-- Search your book easily wiht book's name or book's author.
+- Search your book easily with book's name or book's author.
 
 ## Project structure
   `BulkyBookWeb2`
@@ -35,8 +35,8 @@ Main features:
 
 ## Configure Google authentication
 1. Every users will need a Google account in order to log in and interact with this app. This helps personalize each user's bookshelf.
-2. To enable Google sign in screen for users, you will need a __Google OAuth 2.0__ Client ID and Client secret configured using your __Google Console - API & Services__.
-3. Follow this step by step [instructions][google-signin-instructions] to setup a Client ID and secret, then store them in the project using __dotnet user-secrets__.
+2. To enable Google sign in screen for users, you will need a __Google OAuth 2.0__ Client ID and Client secret configured using __Google Console - API & Services__.
+3. Follow this step by step [instructions][google-signin-instructions] to setup a Client ID and secret, then store them in this project using __dotnet user-secrets__.
 4. As you can see in __Program.cs__ file, these 2 values will be accessed like this:
 ```C#
     if (builder.Environment.IsDevelopment())
