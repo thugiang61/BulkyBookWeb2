@@ -10,6 +10,8 @@ Main features:
 - Filter your books by year.
 - Search your book easily with book's name or book's author.
 
+This project uses following main technologies: .NET, HTML, CSS, JS,  Google OAuth, Toastr, Bootstrap, SQL Express.
+
 ## Project structure
   `BulkyBookWeb2`
   
